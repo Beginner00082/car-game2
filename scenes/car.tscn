@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq8x7d2m4k3p1"]
+
+[ext_resource type="Script" path="res://scripts/car_controller.gd" id="1_car_script"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(2, 1, 4)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
+height = 0.4
+radius = 0.4
+
+[sub_resource type="VehicleWheel3D" id="VehicleWheel3D_fl"]
+wheel_radius = 0.4
+wheel_rest_length = 0.2
+suspension_stiffness = 40.0
+suspension_max_force = 6000.0
+damping_compression = 0.8
+damping_relaxation = 1.0
+
+[node name="Car" type="VehicleBody3D"]
+script = ExtResource("1_car_script")
+mass = 40.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="WheelFrontLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.3, 1.5)
+wheel_radius = 0.4
+suspension_travel = 0.3
+use_as_steering = true
+
+[node name="WheelFrontRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.3, 1.5)
+wheel_radius = 0.4
+suspension_travel = 0.3
+use_as_steering = true
+
+[node name="WheelBackLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.3, -1.5)
+wheel_radius = 0.4
+suspension_travel = 0.3
+use_as_traction = true
+
+[node name="WheelBackRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 1, 1, 1, -0.3, -1.5)
+wheel_radius = 0.4
+suspension_travel = 0.3
+use_as_traction = true
